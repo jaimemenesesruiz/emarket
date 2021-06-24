@@ -1,0 +1,48 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'net.ltgt.apt' version '0.21'
+}
+
+group = 'co.com.personalsoft'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+/*spring*/
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	/*lombok*/
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	/*devtools*/
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'mysql:mysql-connector-java'
+	/*test*/
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	/*swagger*/
+	implementation group: 'io.springfox',name: 'springfox-swagger2', version: '3.0.0'
+	implementation group: 'io.springfox',name: 'springfox-swagger-ui', version: '3.0.0'
+	implementation group: 'io.springfox',name: 'springfox-spring-web', version: '3.0.0'
+	implementation group: 'io.springfox',name: 'springfox-boot-starter', version: '3.0.0'
+	implementation group: 'io.springfox',name: 'springfox-core', version: '3.0.0'
+	/*mapstruct*/
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+}
+
+test {
+	useJUnitPlatform()
+}

@@ -1,0 +1,38 @@
+package co.com.personalsoft.market.persistence.mappers;
+
+import java.util.List;
+
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.springframework.stereotype.Component;
+
+import co.com.personalsoft.market.domain.viewmodel.Product;
+import co.com.personalsoft.market.domain.viewmodel.PurchaseItem;
+import co.com.personalsoft.market.persistence.models.ComprasProducto;
+import co.com.personalsoft.market.persistence.models.Producto;
+
+@Mapper(componentModel = "spring",uses = {ProductMapper.class})
+public interface PurchaseItemMapper {
+	@Mappings({ @Mapping(source = "id.idProducto", target = "productId"),
+	//@Mappings({ @Mapping(source = "idProducto", target = "productId"),
+		@Mapping(source = "cantidad", target = "quantity"), 
+		@Mapping(source = "total", target = "total"),
+		@Mapping(source = "estado", target = "active")
+
+})
+	PurchaseItem toPurchaseItem(ComprasProducto comprasProducto);
+
+@InheritInverseConfiguration
+@Mappings({
+@Mapping(target = "compra", ignore = true),
+@Mapping(target = "producto", ignore = true),
+//@Mapping(target = "idCompra", ignore = true)
+@Mapping(target = "id.idCompra", ignore = true)
+})
+ComprasProducto toComprasProducto(PurchaseItem purchaseItem);
+
+
+List<Product> toProducts(List<Producto> productos);
+}
